@@ -8,6 +8,11 @@ export default (state, action) => {
         ...state,
         transactions: [action.payload, ...state.transactions],
       };
+    case "FILTER_TRANSACTION": 
+    console.log('masuk filter transaksi reducer')
+      return {
+        ...state
+      }
     // case "GET_BALANCE":
     //   return {
     //     ...state,
@@ -29,6 +34,7 @@ export default (state, action) => {
     //     ...state,
     //   };
     default:
+      console.log(state, 'default')
       return state;
   }
 };

@@ -32,6 +32,13 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function filterTransaction(filterdata) {
+    dispatch({
+      type: "FILTER_TRANSACTION",
+      payload: filterdata,
+    });
+  }
+
   function getTransaction() {
     dispatch({
       type: "GET_TRANSACTION",
@@ -79,6 +86,7 @@ export const GlobalProvider = ({ children }) => {
         balance: state.balance,
         deleteTransaction,
         addTransaction,
+        filterTransaction,
         getTransaction,
         getBalance,
         getIncome,

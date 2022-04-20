@@ -6,16 +6,59 @@ import FilterTransaction from "../components/FilterTransaction";
 import "../styles/table.css";
 
 export default function OverviewPage() {
+  // const [totalIncome, setTotalIncome] = useState(0);
 
-  const { transactions, getTransaction } = useContext(GlobalContext)
+  const {
+    transactions,
+    getTransaction,
+    getExpense,
+    getBalance,
+    getIncome,
+    income,
+    balance,
+    expense,
+  } = useContext(GlobalContext);
+
   useEffect(() => {
-    getTransaction()
-  
-  }, [])
+    getTransaction();
+    getIncome();
+    getExpense();
+    getBalance();
+  }, []);
+  // console.log(income, 'di component')
+
+  // function totalIncome() {
+  //   let resIncome = 0;
+  //   for (let i = 0; i < transactions.length; i++) {
+  //     if (transactions[i].category === "income") {
+  //       resIncome = resIncome += transactions[i].amount;
+  //     }
+  //   }
+  //   return resIncome;
+  // }
+
+  // function totalExpense() {
+  //   let resExpense = 0;
+  //   for (let i = 0; i < transactions.length; i++) {
+  //     if (transactions[i].category === "expense") {
+  //       resExpense = resExpense += transactions[i].amount;
+  //     }
+  //   }
+  //   return resExpense;
+  // }
+
+  // function totalBalance() {
+  //   let resBalance = totalIncome() - totalExpense();
+  //   return resBalance;
+  // }
 
   return (
     <div className="container">
-      <Info />
+      <Info
+        infoIncome={income}
+        infoExpense={expense}
+        infoBalance={balance}
+      />
       <FilterTransaction />
       <table>
         <thead>
@@ -34,9 +77,13 @@ export default function OverviewPage() {
                 <td data-column="Id">{el.id}</td>
                 <td data-column="PIC">{el.PIC}</td>
                 {el.category === "income" ? (
-                  <td data-column="Amount" className="income-data"> + {el.amount}</td>
+                  <td data-column="Amount" className="income-data">
+                    + {el.amount}
+                  </td>
                 ) : (
-                  <td data-column="Amount" className="expense-data"> - {el.amount}</td>
+                  <td data-column="Amount" className="expense-data">
+                    - {el.amount}
+                  </td>
                 )}
                 <td data-column="Balance">{el.balance}</td>
                 <td data-column="Created Date">{el.createdAt}</td>

@@ -5,6 +5,7 @@ import "../styles/modal.css";
 export default function Modal({ setOpenModal }) {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState(0);
+  const [balance, setBalance] = useState(0);
   const [category, setCategory] = useState("income");
 
   const { addTransaction } = useContext(GlobalContext);
@@ -16,7 +17,8 @@ export default function Modal({ setOpenModal }) {
       id: Math.floor(Math.random() * 100000000),
       PIC: text,
       category,
-      amount,
+      amount: parseInt(amount),
+      balance,
       createdAt: new Date().toLocaleDateString("en-US"),
     };
     addTransaction(newTransaction);

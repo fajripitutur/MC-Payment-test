@@ -3,32 +3,27 @@ import "../styles/info.css";
 import Modal from "./Modal";
 import { GlobalContext } from "../context/action";
 
-export default function Info() {
+export default function Info(props) {
   const [modalOpen, setModalOpen] = useState(false);
-  const { transactions, balance, expense, income } = useContext(GlobalContext);
 
-  useEffect(() => {
-
-  })
-  
   return (
     <div className="info-section">
       <div className="card">
         <div className="card-content">
           <div className="card-title">Balance</div>
-          <div className="card-subtitle">{balance}</div>
+          <div className="card-subtitle">{props.infoBalance}</div>
         </div>
       </div>
       <div className="card">
         <div className="card-content">
           <div className="card-title">Expense</div>
-          <div className="card-subtitle">1000 dummy</div>
+          <div className="card-subtitle">{props.infoExpense}</div>
         </div>
       </div>
       <div className="card">
         <div className="card-content">
           <div className="card-title">Income</div>
-          <div className="card-subtitle">1000 dummy</div>
+          <div className="card-subtitle">{props.infoIncome}</div>
         </div>
       </div>
       <button

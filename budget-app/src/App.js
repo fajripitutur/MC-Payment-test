@@ -4,7 +4,7 @@ import ExpensePage from "./pages/ExpensePage";
 import IncomePage from "./pages/IncomePage";
 import OverviewPage from "./pages/OverviewPage";
 import NavBar from "./components/NavBar";
-
+  
 function App() {
   return (
     <BrowserRouter>

@@ -1,0 +1,23 @@
+.container-pagination {
+  text-align: center;
+}
+.pagination {
+  display: inline-block;
+  margin-top: 10px;
+  height: 30px;
+}
+
+.pagination a {
+  color: #383838;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 3px #383838 solid;
+  border-radius: 10px;
+  margin: 0 5px;
+}
+
+.active-pagination {
+  background-color: #383838;
+  color: whitesmoke !important;
+}

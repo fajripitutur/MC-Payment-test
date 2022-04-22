@@ -1,4 +1,32 @@
- *  {
-   margin: 0px;
-   padding: 0px;
- }
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+input,
+select {
+  width: 100%;
+  height: 25px;
+  padding-bottom: 10px;
+  line-height: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+select {
+  border-radius: 5px;
+  width: 100%;
+  height: 38px !important;
+  line-height: 50px;
+  -webkit-appearance: menulist-button;
+  -moz-appearance: none;
+}
+
+.plus {
+  color: #2ecc71;
+}
+
+.minus {
+  color: #c0392b;
+}
+

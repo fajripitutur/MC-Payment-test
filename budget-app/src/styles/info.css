@@ -1,11 +1,4 @@
 
-h1 {
-  margin: 0;
-  padding: 8px 48px;
-  background: #333;
-  color: #fff;
-  font-size: 24px;
-}
 .info-section {
   display: flex;
   justify-content: flex-start;
@@ -14,25 +7,42 @@ h1 {
 }
 
 .card {
-  width: 200px;
-  /* height: 90px; */
-  margin: 16px;
-  border: 1px solid #ccc;
   border-radius: 8px;
-  background: #fff;
   box-sizing: border-box;
   vertical-align: middle;
 }
 
 .card-content {
-  padding: 10px;
+  padding: 20px;
 }
 .card-title {
   font-weight: 600;
   font-size: 20px;
+  text-align: center;
 }
 .card-subtitle {
   word-wrap: break-word;
+  font-size: 20px;
+  padding-top: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+.bal-container,
+.inc-exp-container {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 10px;
+  justify-content: space-between;
+  margin: 20px 20px 20px 0px;
+}
+
+.inc-exp-container > div {
+  flex: 1;
+  text-align: center;
+}
+
+.inc-exp-container > div:first-of-type {
+  border-right: 1px solid #dededd;
 }
 
 .button_add_transaction {
@@ -41,15 +51,15 @@ h1 {
   align-self: center;
   border-radius: 8px;
   background-color: #ccc;
-  padding: 3px 30px ;
-  border:  1px #383838 solid;
+  padding: 3px 30px;
+  border: 1px #383838 solid;
 }
 
 @media only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 1024px) {
   .card {
     width: 100%;
-    height: 5rem;
+    /* height: 8rem; */
     margin: 5px;
     border: 1px solid #ccc;
     border-radius: 8px;

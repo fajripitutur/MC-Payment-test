@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import "../styles/navbar.css";
+import Modal from "./Modal";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModal = () => {
+    setIsExpanded(false);
+    setModalOpen(true);
+  };
 
   return (
-
     <nav className="navigation">
-      <a href="/" className="brand-name">Budget App</a>
+      <a href="/" className="brand-name">
+        Budget App
+      </a>
       <button className="hamburger" onClick={() => setIsExpanded(!isExpanded)}>
         {/* icon from heroicons.com */}
         <svg
@@ -24,21 +32,28 @@ export default function NavBar() {
           />
         </svg>
       </button>
-      <div 
+      <div
         className={isExpanded ? "navigation-menu expanded" : "navigation-menu"}
       >
         <ul>
-          <li>
-            <Link to="/" onClick={() => setIsExpanded(!isExpanded)}>Overview</Link>
+          <li className="list-nav">
+            <Link to="/" onClick={() => setIsExpanded(!isExpanded)}>
+              Overview
+            </Link>
           </li>
-          <li>
-            <Link to="/expenses" onClick={() => setIsExpanded(!isExpanded)}>Expenses</Link>
-          </li>
-          <li>
-            <Link to="/income" onClick={() => setIsExpanded(!isExpanded)}>Income</Link>
+          <li className="list-nav">
+            <Link
+              to="/"
+              onClick={() => {
+                handleModal();
+              }}
+            >
+              Add Transaction
+            </Link>
           </li>
         </ul>
       </div>
+      {modalOpen && <Modal setOpenModal={setModalOpen} />}
     </nav>
   );
 }

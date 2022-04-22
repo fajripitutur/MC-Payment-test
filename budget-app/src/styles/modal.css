@@ -1,15 +1,22 @@
 .modalBackground {
-  width: 95%;
-  /* height: 100%; */
-  /* background-color: rgba(200, 200, 200); */
+  width: 100%;
   position: fixed;
+  top: 80px;
   display: flex;
   justify-content: center;
   align-items: start;
   z-index: 2;
 }
-
-.modalContainer {
+h1 {
+  margin: 0;
+  padding: 8px 48px;
+  background: #383838;
+  color: #fff;
+  font-size: 24px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.modal-container {
   width:80%;
   height: 50%;
   border-radius: 12px;
@@ -20,11 +27,13 @@
   padding: 25px;
 }
 
-.modalContainer .title {
+.modal-container .title {
   display: inline-block;
   text-align: center;
   margin-top: 10px;
+  border-radius: 12px;
 }
+
 
 .titleCloseBtn {
   display: flex;
@@ -38,14 +47,14 @@
   cursor: pointer;
 }
 
-.modalContainer .footer {
+.modal-container .footer {
   flex: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.modalContainer .footer button {
+.modal-container .footer button {
   width: 150px;
   height: 45px;
   margin: 10px;

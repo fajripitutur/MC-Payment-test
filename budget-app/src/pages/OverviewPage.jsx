@@ -3,17 +3,22 @@ import React, { useEffect, useState, useContext } from "react";
 import { GlobalContext } from "../context/action";
 import Info from "../components/Info";
 import FilterTransaction from "../components/FilterTransaction";
+import Pagination from "../components/pagination";
+import TransactionList from "../components/TransactionList";
 import "../styles/table.css";
 
 export default function OverviewPage() {
   // const [totalIncome, setTotalIncome] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+  const [isFilter, setIsFilter] = useState(false);
 
   const {
-    transactions,
     getTransaction,
     getExpense,
     getBalance,
     getIncome,
+    transactions,
     income,
     balance,
     expense,
@@ -24,42 +29,29 @@ export default function OverviewPage() {
     getIncome();
     getExpense();
     getBalance();
-  }, []);
-  // console.log(income, 'di component')
+  }, [transactions, currentPage]);
 
-  // function totalIncome() {
-  //   let resIncome = 0;
-  //   for (let i = 0; i < transactions.length; i++) {
-  //     if (transactions[i].category === "income") {
-  //       resIncome = resIncome += transactions[i].amount;
-  //     }
-  //   }
-  //   return resIncome;
-  // }
+  let indexOfLastPost = currentPage * postsPerPage;
+  let indexOfFirstPost = indexOfLastPost - postsPerPage;
 
-  // function totalExpense() {
-  //   let resExpense = 0;
-  //   for (let i = 0; i < transactions.length; i++) {
-  //     if (transactions[i].category === "expense") {
-  //       resExpense = resExpense += transactions[i].amount;
-  //     }
-  //   }
-  //   return resExpense;
-  // }
+  if (isFilter) {
+    indexOfFirstPost = 0;
+    indexOfLastPost = 5;
+  }
 
-  // function totalBalance() {
-  //   let resBalance = totalIncome() - totalExpense();
-  //   return resBalance;
-  // }
+  let currentTransaction = transactions.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    setIsFilter(false);
+  };
 
   return (
     <div className="container">
-      <Info
-        infoIncome={income}
-        infoExpense={expense}
-        infoBalance={balance}
-      />
-      <FilterTransaction />
+      <FilterTransaction isFilter={isFilter} setIsFilter={setIsFilter} />
+      <Info infoIncome={income} infoExpense={expense} infoBalance={balance} />
       <table>
         <thead>
           <tr>
@@ -71,27 +63,15 @@ export default function OverviewPage() {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((el, id) => {
-            return (
-              <tr key={id}>
-                <td data-column="Id">{el.id}</td>
-                <td data-column="PIC">{el.PIC}</td>
-                {el.category === "income" ? (
-                  <td data-column="Amount" className="income-data">
-                    + {el.amount}
-                  </td>
-                ) : (
-                  <td data-column="Amount" className="expense-data">
-                    - {el.amount}
-                  </td>
-                )}
-                <td data-column="Balance">{el.balance}</td>
-                <td data-column="Created Date">{el.createdAt}</td>
-              </tr>
-            );
-          })}
+          <TransactionList transactionList={currentTransaction} />
         </tbody>
       </table>
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={transactions.length}
+        currPage={currentPage}
+        paginate={paginate}
+      />
     </div>
   );
 }

@@ -7,34 +7,44 @@ export default (state, action) => {
         transactions: [action.payload, ...state.transactions],
       };
     case "GET_TRANSACTION":
-      // console.log(state, "---reducer");
       return {
         ...state,
       };
+    case "FILTER_TRANSACTION":
+      console.log(action.payload, 'actionp ')
+      return {
+        ...state,
+        transactions: [...action.payload]
+        // transactions: [action.payload, ...state.transactions],
+      };
     case "GET_BALANCE":
-      // console.log(state, "---balancereducer");
-
+      state.balance = state.income - state.expense;
       return {
         ...state,
       };
     case "GET_INCOME":
+      let totalIncome = 0;
       for (let i = 0; i < state.transactions.length; i++) {
-        if (state.transactions[i].category === 'income') {
-          state.income += state.transactions[i].amount
-          break;
+        if (state.transactions[i].category === "income") {
+          totalIncome = totalIncome += state.transactions[i].amount;
         }
       }
+      state.income = totalIncome;
       return {
         ...state,
       };
     case "GET_EXPENSE":
-      // console.log(state, "---reducer");
-
+      let totalExpense = 0;
+      for (let i = 0; i < state.transactions.length; i++) {
+        if (state.transactions[i].category === "expense") {
+          totalExpense = totalExpense += state.transactions[i].amount;
+        }
+      }
+      state.expense = totalExpense;
       return {
         ...state,
       };
     default:
-      // console.log(state, '---default')
       return state;
   }
 };

@@ -8,6 +8,8 @@ const initialState = {
   balance: 0,
   expense: 0,
   income: 0,
+  arr: [],
+  isFilter: false
 };
 
 // Create context
@@ -25,43 +27,69 @@ export const GlobalProvider = ({ children }) => {
   }
 
   function getTransaction() {
-    // console.log('weeweewew');
     dispatch({
       type: "GET_TRANSACTION",
     });
   }
 
-  function getIncome() {
-    // dispatch({
-    //   type: 'GET_INCOME',
-    // })
-    let totalIncome = 0;
-    for (let i = 0; i < state.transactions.length; i++) {
-      if (state.transactions[i].category === "income") {
-        totalIncome = totalIncome += state.transactions[i].amount;
-      }
+  function addFilter(filterdata) {
+
+    let transactions = state.transactions;
+
+    let { id, category } = filterdata;
+    if (filterdata) state.isFilter = true
+
+    let hasil_akhir;
+    if(filterdata.id){
+
+      hasil_akhir = transactions.filter((el) => {
+        return el.id == id;
+      });
     }
-    state.income = totalIncome;
+
+    if(filterdata.category){
+      hasil_akhir = !hasil_akhir ? transactions.filter((el) => {
+        return el.category == category ;
+
+      }): hasil_akhir.filter((el) => {
+        return el.category == category 
+      })
+    }
+    // let result = transactions.filter((el) => {
+    //   return el.id == id;
+    // });
+
+
+    // let result2 = transactions.filter((el) => {
+    //   return el.id == id;
+    // });
+
+    //gabing resukt 1 sama 2
+
+
+    dispatch({
+      type: "FILTER_TRANSACTION",
+      payload: hasil_akhir
+    });
+    console.log(hasil_akhir, 'hasil akhir');
+  }
+
+  function getIncome() {
+    dispatch({
+      type: "GET_INCOME",
+    });
   }
 
   function getExpense() {
-    // dispatch({
-    //   type: "GET_EXPENSE",
-    // });
-    let totalExpense = 0;
-    for (let i = 0; i < state.transactions.length; i++) {
-      if (state.transactions[i].category === "expense") {
-        totalExpense = totalExpense += state.transactions[i].amount;
-      }
-    }
-    state.expense = totalExpense;
+    dispatch({
+      type: "GET_EXPENSE",
+    });
   }
 
   function getBalance() {
-    // dispatch({
-    //   type: "GET_BALANCE",
-    // });
-    state.balance = state.income - state.expense
+    dispatch({
+      type: "GET_BALANCE",
+    });
   }
 
   return (
@@ -72,6 +100,7 @@ export const GlobalProvider = ({ children }) => {
         expense: state.expense,
         balance: state.balance,
         addTransaction,
+        addFilter,
         getTransaction,
         getBalance,
         getIncome,

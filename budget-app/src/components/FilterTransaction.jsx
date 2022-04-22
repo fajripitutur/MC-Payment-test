@@ -3,28 +3,23 @@ import { GlobalContext } from "../context/action";
 import "../styles/filter.css";
 import "../App.css";
 
-export default function FilterTransaction() {
+export default function FilterTransaction({ isFilter, setIsFilter }) {
   const [id, setId] = useState("");
-  const [pic, setPic] = useState("");
   const [category, setCategory] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
 
-  const { filterTransaction } = useContext(GlobalContext);
+  const { addFilter } = useContext(GlobalContext);
 
   const handleSubmitFilter = (e) => {
     e.preventDefault();
 
-    const filter = {
+    const filters = {
       id: id,
-      pic: pic,
       category: category,
-      startDate: startDate,
-      endDate: endDate,
     };
-    console.log(filter, 'inifilter-')
-    filterTransaction(filter);
-  }
+
+    setIsFilter(true);
+    addFilter(filters);
+  };
 
   return (
     <div style={{ marginBottom: "10px" }}>
@@ -32,18 +27,10 @@ export default function FilterTransaction() {
         <div className="wrap-field">
           <label className="field">Transaction Id:</label>
           <input
-            className=""
+            className="filter-input"
             type="text"
             name="id"
             onChange={(e) => setId(e.target.value)}
-          />
-        </div>
-        <div className="wrap-field">
-          <label className="field">PIC:</label>
-          <input
-            type="text"
-            name="PIC"
-            onChange={(e) => setPic(e.target.value)}
           />
         </div>
         <div className="wrap-field">
@@ -59,24 +46,6 @@ export default function FilterTransaction() {
               expense
             </option>
           </select>
-        </div>
-        <div className="wrap-field">
-          <label className="field">start date:</label>
-          <input
-            className=""
-            type="date"
-            name="start-date"
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </div>
-        <div className="wrap-field">
-          <label className="field">end date:</label>
-          <input
-            className=""
-            type="date"
-            name="end-date"
-            onChange={(e) => setEndDate(e.target.value)}
-          />
         </div>
         <button className="button_search" type="submit" value="Submit">
           search
